@@ -2,6 +2,65 @@
 
 Minimal Terraform configuration for deploying an Amazon EKS cluster with VPC.
 
+## 🎯 About This Repository
+
+This repository is part of the **ecommerce-polyrepo** project - a polyrepo setup designed for testing the [Propel](https://propel.us) code review feature across multiple microservices.
+
+### Role in Microservices Architecture
+
+This repository provides the **production-grade Kubernetes infrastructure** for deploying all microservices to AWS EKS:
+
+```
+┌─────────────────────────────────────────┐
+│         AWS Cloud Infrastructure         │
+│  ┌────────────────────────────────────┐ │
+│  │          EKS Cluster                │ │
+│  │  ┌──────────┐  ┌──────────────┐   │ │
+│  │  │ Frontend │  │ API Gateway  │   │ │
+│  │  │(Next.js) │  │   (Go/Gin)   │   │ │
+│  │  └──────────┘  └──────────────┘   │ │
+│  │  ┌──────────┐  ┌──────────────┐   │ │
+│  │  │   User   │  │   Listing    │   │ │
+│  │  │ Service  │  │   Service    │   │ │
+│  │  └──────────┘  └──────────────┘   │ │
+│  │  ┌──────────┐  ┌──────────────┐   │ │
+│  │  │Inventory │  │  PostgreSQL  │   │ │
+│  │  │ Service  │  │    Redis     │   │ │
+│  │  └──────────┘  └──────────────┘   │ │
+│  └────────────────────────────────────┘ │
+│                                          │
+│  Provisioned by Terraform [THIS REPO]   │
+└─────────────────────────────────────────┘
+```
+
+### Quick Start (Standalone Testing)
+
+To test infrastructure provisioning locally without AWS costs:
+
+```bash
+# 1. Ensure prerequisites are installed
+terraform -version
+docker --version
+
+# 2. Start LocalStack (AWS emulator)
+./scripts/start-localstack.sh
+
+# 3. Deploy infrastructure to LocalStack
+./scripts/deploy-localstack.sh
+
+# 4. Test deployed services
+./scripts/test-localstack.sh
+
+# 5. Cleanup when done
+./scripts/cleanup-localstack.sh
+
+# For detailed LocalStack usage, see LOCALSTACK.md
+```
+
+**Note:** For local development, use the `local-k8s/` directory in the [parent polyrepo](https://github.com/jasonyuezhang/ecommerce-polyrepo) which provides Minikube setup. This repo is for production AWS EKS deployment with Terraform.
+
+---
+
 ## Overview
 
 This repository contains Terraform configurations to deploy:
