@@ -1,0 +1,53 @@
+services:
+  localstack:
+    container_name: localstack-aws
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # External services port range
+    environment:
+      # Core LocalStack configuration
+      - SERVICES=s3,dynamodb,sqs,sns,lambda,cloudwatch,logs,iam,sts,secretsmanager,ssm,ecr,ecs,apigateway,cloudformation
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOSTNAME=localstack
+      - HOSTNAME_EXTERNAL=localstack
+
+      # Persistence configuration
+      - PERSISTENCE=1
+      - PERSIST_ALL=1
+
+      # AWS configuration defaults
+      - DEFAULT_REGION=us-east-1
+
+      # Lambda configuration
+      - LAMBDA_EXECUTOR=docker
+      - LAMBDA_DOCKER_NETWORK=localstack-network
+
+      # Feature flags
+      - DISABLE_CORS_CHECKS=1
+      - SKIP_SSL_CERT_DOWNLOAD=1
+
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - localstack-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Note: LocalStack Web UI is available at https://app.localstack.cloud (requires Pro)
+  # For local development, you can use the AWS CLI or access the LocalStack instance directly
+
+networks:
+  localstack-network:
+    driver: bridge
+    name: localstack-network
+
+volumes:
+  localstack-data:
+    driver: local
