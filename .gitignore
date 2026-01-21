@@ -42,3 +42,9 @@ Thumbs.db
 
 # Local backend state (if using local backend for testing)
 terraform.tfstate.d/
+
+# LocalStack
+localstack-data/
+.localstack/
+.localstack-terraform/
+volume/

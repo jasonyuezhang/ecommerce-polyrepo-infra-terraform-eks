@@ -31,6 +31,35 @@ This repository contains Terraform configurations to deploy:
 - AWS CLI configured with appropriate credentials
 - kubectl for cluster access
 
+## Local Development with LocalStack
+
+For local testing and validation without deploying to AWS, you can use LocalStack to emulate AWS services locally.
+
+### Quick Start with LocalStack
+
+```bash
+# Start LocalStack
+./scripts/start-localstack.sh
+
+# Deploy infrastructure to LocalStack
+./scripts/deploy-localstack.sh
+
+# Test deployed services
+./scripts/test-localstack.sh
+
+# Cleanup when done
+./scripts/cleanup-localstack.sh
+```
+
+📖 **See [LOCALSTACK.md](./LOCALSTACK.md) for detailed LocalStack usage guide**
+
+LocalStack provides:
+- ✅ Local AWS service emulation (S3, DynamoDB, SQS, SNS, etc.)
+- ✅ No AWS costs for development
+- ✅ Fast iteration and testing
+- ✅ AWS CLI compatible interface
+- ✅ Data persistence between restarts
+
 ## Usage
 
 ### Initialize Terraform
