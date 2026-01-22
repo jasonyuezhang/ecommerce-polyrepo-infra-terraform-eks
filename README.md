@@ -67,6 +67,8 @@ This repository contains Terraform configurations to deploy:
 - VPC with public and private subnets
 - EKS cluster with managed node groups
 - Required IAM roles and security groups
+- Application Load Balancer for REST and GraphQL gateways
+- Target groups for service routing
 
 ## Architecture
 
