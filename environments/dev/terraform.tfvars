@@ -2,7 +2,7 @@
 
 aws_region   = "us-east-1"
 environment  = "dev"
-project_name = "ecommerce"
+project_name = "commerce"
 
 # VPC Configuration
 vpc_cidr             = "10.0.0.0/16"
