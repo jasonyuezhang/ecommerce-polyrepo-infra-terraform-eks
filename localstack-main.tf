@@ -111,7 +111,7 @@ resource "aws_dynamodb_table" "sessions" {
 
 # SQS queue for order processing
 resource "aws_sqs_queue" "order_processing" {
-  name                      = "${local.name_prefix}-order-processing"
+  name                      = "${local.name_prefix}-order-events"
   delay_seconds             = 0
   max_message_size          = 262144
   message_retention_seconds = 345600
