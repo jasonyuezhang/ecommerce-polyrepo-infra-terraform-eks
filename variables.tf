@@ -57,7 +57,7 @@ variable "node_instance_types" {
 variable "node_desired_size" {
   description = "Desired number of nodes in the node group"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "node_min_size" {
