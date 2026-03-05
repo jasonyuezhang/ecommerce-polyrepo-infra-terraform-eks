@@ -66,7 +66,7 @@ resource "aws_dynamodb_table" "sessions" {
 # Example: SQS queue for async processing
 resource "aws_sqs_queue" "order_processing" {
   count                     = var.use_localstack ? 1 : 0
-  name                      = "${var.project_name}-${var.environment}-order-processing"
+  name                      = "${var.project_name}-${var.environment}-orders"
   delay_seconds             = 0
   max_message_size          = 262144
   message_retention_seconds = 345600
